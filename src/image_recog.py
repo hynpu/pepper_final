@@ -195,7 +195,11 @@ def main():
                     cv2.imwrite('Temp.png', thresholded)
                     resizeImage('Temp.png')
                     predictedClass, confidence = getPredictedClass()
-                    showStatistics(predictedClass, confidence)
+                    className = showStatistics(predictedClass, confidence)
+
+                    rospy.loginfo(className)
+                    pub.publish(className)
+                    
                 cv2.imshow("Thesholded", thresholded)
 
         # draw the segmented hand
@@ -261,14 +265,15 @@ def showStatistics(predictedClass, confidence):
     2)
     cv2.imshow("Statistics", textImage)
 
-def talker():
-    pub = rospy.Publisher('chatter', String, queue_size=10)
+    return className
+
+def talker(gesture_class):
+    pub = rospy.Publisher('gesture_class', Int8, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        hello_str = "hello world %s" % rospy.get_time()
-        rospy.loginfo(hello_str)
-        pub.publish(hello_str)
+        rospy.loginfo(gesture_class)
+        pub.publish(gesture_class)
         rate.sleep()
 
 if __name__ == '__main__':
@@ -276,8 +281,10 @@ if __name__ == '__main__':
         net = Net()
         load_model_txt(net, PATH)
 
+        pub = rospy.Publisher('gesture_class', String, queue_size=10)
+        rospy.init_node('talker', anonymous=True)
+
         main()
         
-        talker()
     except rospy.ROSInterruptException:
         pass
