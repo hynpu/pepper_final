@@ -2,7 +2,7 @@
 
 # Hand gesture capture using OPENCV
 
-https://gogul.dev/software/hand-gesture-recognition-p1
+https://gogul.dev/software/hand-gesture-recognition-p1 (you can copy and rephrase the passage from the link)
 
 Run the buildDataSet.py file to capture hand gesture from a webcam. Each run will generate 100 .png files for training.
 
@@ -14,7 +14,7 @@ He has written an awesome article on the problem and you can read it up here.
 
 # Train the dataset
 
-https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html#sphx-glr-beginner-blitz-neural-networks-tutorial-py
+https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html#sphx-glr-beginner-blitz-neural-networks-tutorial-py (rephrase the passage from this link)
 
 Neural networks can be constructed using the torch.nn package.
 
@@ -36,3 +36,10 @@ A typical training procedure for a neural network is as follows:
 the detailed code example can be found here:
 
 https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
+
+# Smooth the gesture capture
+
+https://github.com/hynpu/pepper_final/blob/main/src/ges_signal_proc.py
+
+Run a smooth filter at the frequency of 20Hz. The algo will filter the most common appeared gesture from topic "gesture_class", and also consider if the appearance number of current gesture is greater than the threshold (which is 60% of the past 20 gestures). If so, output the gesture to the topic 'cur_gest', which will be used by PEPPER.
+
