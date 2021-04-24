@@ -1,0 +1,4 @@
+<launch>
+  <node name="talker" pkg="pepper_final" type="image_recog.py" output="screen"/>
+  <node name="listener" pkg="pepper_final" type="ges_signal_proc.py" output="screen"/>
+</launch>

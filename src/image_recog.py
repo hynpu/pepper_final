@@ -197,8 +197,8 @@ def main():
                     predictedClass, confidence = getPredictedClass()
                     className = showStatistics(predictedClass, confidence)
 
-                    rospy.loginfo(className)
-                    pub.publish(className)
+                    rospy.loginfo(predictedClass)
+                    pub.publish(predictedClass)
                     
                 cv2.imshow("Thesholded", thresholded)
 
@@ -281,8 +281,9 @@ if __name__ == '__main__':
         net = Net()
         load_model_txt(net, PATH)
 
-        pub = rospy.Publisher('gesture_class', String, queue_size=10)
         rospy.init_node('talker', anonymous=True)
+        
+        pub = rospy.Publisher('gesture_class', Int8, queue_size=10)
 
         main()
         
