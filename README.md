@@ -16,7 +16,9 @@ There are following main components in the project
     + find the most common gesture in the gesture class list, so that we can avoid the "noise"
     + the threshold is 60%, which means the most common gesture will be at least 60% of the captured past 10 gestures; otherwise we will think the data collection is too noisy, and send "no move" to the PEPPER; if the most common gesture is more frequent than 60%, then we send the movement to PEPPER (left, right, no move, OK means started to collect man, and flow means whatever)
   + pepper control node:
-    +
+    + simple walk: http://doc.aldebaran.com/2-8/dev/python/examples/motion/walk.html
+    + collect map: http://doc.aldebaran.com/2-8/naoqi/motion/exploration-api.html#exploration-api
+    + navigation: http://doc.aldebaran.com/2-8/naoqi/motion/alnavigation.html#alnavigation
 
 # Hand gesture capture using OPENCV
 
