@@ -1,5 +1,23 @@
 # pepper_final
 
+There are following main components in the project
+
++ hand gesture capture suing OPENCV
++ build the hand gesture dataset, including 5 gestures (stop, left, right, flow, OK)
++ trian the dataset using pytorch on GOOGLE COLAB, which is a free online server which can easily and efficiently train your model
++ build the ROS package, which includes: 
+  + hand gesture recognition node:
+    + load the saved trained neural network weight parameters (trained on google colab), and there is an explanationn from this page https://stackoverflow.com/questions/64141188/how-to-load-checkpoints-across-different-versions-of-pytorch-1-3-1-and-1-6-x-u (This is not an ideal solution, but it works for transferring checkpoints from newer versions to older versions.) 
+    + capture the hand gesture (realtim) using the webcam, and then save the hand gesture image to the neural network to get the gesture class (left, right, OK...)
+    + publish the gesture to the ROS topic gesture_class
+  + gesture class smooth node
+    + the node runs 20 hz, and there is a gesture class list, which collects the **most recent** 10 gestures
+    + in each execution, the node will collect the current gesture class given by the hand gesture recognition node, and also it will discard the oldest gesture
+    + find the most common gesture in the gesture class list, so that we can avoid the "noise"
+    + the threshold is 60%, which means the most common gesture will be at least 60% of the captured past 10 gestures; otherwise we will think the data collection is too noisy, and send "no move" to the PEPPER; if the most common gesture is more frequent than 60%, then we send the movement to PEPPER (left, right, no move, OK means started to collect man, and flow means whatever)
+  + pepper control node:
+    +
+
 # Hand gesture capture using OPENCV
 
 https://gogul.dev/software/hand-gesture-recognition-p1 (you can copy and rephrase the passage from the link)
