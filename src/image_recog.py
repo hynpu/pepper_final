@@ -28,7 +28,7 @@ import cv2
 import imutils
 
 # hyper parameters
-PATH = '/home/hy/ece5532-ws/src/pepper_final/src/handGesture_txt.txt'
+PATH = '/home/pourya/catkin_ws/src/pepper_final/src/handGesture_txt.txt'
 NO_classes = 5 # currently support 5 gestures
 transform = transforms.Compose(
 [transforms.Resize((50,50)), transforms.ToTensor(),
@@ -142,7 +142,7 @@ def main():
     aWeight = 0.5
 
     # get the reference to the webcam
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(2)
 
     # region of interest (ROI) coordinates
     top, right, bottom, left = 10, 350, 225, 590
@@ -281,7 +281,7 @@ if __name__ == '__main__':
         net = Net()
         load_model_txt(net, PATH)
 
-        rospy.init_node('talker', anonymous=True)
+        rospy.init_node('image_recog', anonymous=True)
         
         pub = rospy.Publisher('gesture_class', Int8, queue_size=10)
 

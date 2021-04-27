@@ -42,7 +42,7 @@ def main():
 
 if __name__ == '__main__':
 
-  rospy.init_node('listener', anonymous=True)
+  rospy.init_node('gest_proc', anonymous=True)
     rospy.Subscriber("gesture_class", Int8, callback)
   pub = rospy.Publisher('cur_gest', Int8, queue_size=10)
 

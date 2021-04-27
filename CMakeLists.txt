@@ -133,6 +133,14 @@ catkin_install_python(PROGRAMS src/talker.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
+catkin_install_python(PROGRAMS src/pepper_motion.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+catkin_install_python(PROGRAMS src/pepper_slam.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
