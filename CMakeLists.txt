@@ -129,10 +129,6 @@ catkin_install_python(PROGRAMS src/ges_signal_proc.py
 )
 
 
-catkin_install_python(PROGRAMS src/talker.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
 catkin_install_python(PROGRAMS src/pepper_motion.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

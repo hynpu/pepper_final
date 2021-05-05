@@ -1,27 +1,50 @@
-
-
 #!/usr/bin/env python
 import rospy
-from std_msgs.msg import String
+
 from std_msgs.msg import Int8
-import qi
-import argparse
-import sys
-import time
+from geometry_msgs.msg import PoseStamped
+
+pub = rospy.Publisher('chatter', PoseStamped, queue_size=10)
+
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    rospy.loginfo(rospy.get_caller_id() + 'I heard %s', data.data)
+    rate = rospy.Rate(10) # 10hz
+    msg = PoseStamped()
+    pub = rospy.Publisher('/move_base_simple/goal', PoseStamped, queue_size=10)
+    msg.header.frame_id = "base_link"
     
+    if data.data == 0:
+        msg.pose.position.x = 0.1
+        msg.pose.position.y = 0.0
+        msg.pose.position.z = 0.0
+        msg.pose.orientation.x = 0.0
+        msg.pose.orientation.y = 0.0
+        msg.pose.orientation.z = 0.0
+        msg.pose.orientation.w = 1.0
+    elif data.data == 1:
+        msg.pose.position.x = -0.1
+        msg.pose.position.y = 0.0
+        msg.pose.position.z = 0.0
+        msg.pose.orientation.x = 0.0
+        msg.pose.orientation.y = 0.0
+        msg.pose.orientation.z = 0.0
+        msg.pose.orientation.w = 1.0
+    else: 
+        msg.pose.position.x = 0.0
+        msg.pose.position.y = 0.0
+        msg.pose.position.z = 0.0
+        msg.pose.orientation.x = 0.0
+        msg.pose.orientation.y = 0.0
+        msg.pose.orientation.z = 0.0
+        msg.pose.orientation.w = 1.0
+     
+    pub.publish(msg)
+    rate = rospy.Rate(10) # 10hz
+    rate.sleep()
 def listener():
-
-    # In ROS, nodes are uniquely named. If two nodes with the same
-    # name are launched, the previous one is kicked off. The
-    # anonymous=True flag means that rospy will choose a unique
-    # name for our 'listener' node so that multiple listeners can
-    # run simultaneously.
     rospy.init_node('pepper_motion', anonymous=True)
-
-    rospy.Subscriber("cur_gest", Int8, callback)
+    rospy.Subscriber('cur_gest', Int8, callback)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
