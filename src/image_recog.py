@@ -142,10 +142,10 @@ def main():
     aWeight = 0.5
 
     # get the reference to the webcam
-    camera = cv2.VideoCapture(2)
+    camera = cv2.VideoCapture(4)
 
     # region of interest (ROI) coordinates
-    top, right, bottom, left = 10, 350, 225, 590
+    top, right, bottom, left = 10, 10, 225, 250
 
     # initialize num of frames
     num_frames = 0
@@ -197,7 +197,7 @@ def main():
                     predictedClass, confidence = getPredictedClass()
                     className = showStatistics(predictedClass, confidence)
 
-                    rospy.loginfo(predictedClass)
+                    #rospy.loginfo(predictedClass)
                     pub.publish(predictedClass)
                     
                 cv2.imshow("Thesholded", thresholded)
@@ -240,7 +240,7 @@ def getPredictedClass():
 def showStatistics(predictedClass, confidence):
 
     textImage = np.zeros((300,512,3), np.uint8)
-    className_list = ['flow','left','ok','right','stop']
+    className_list = ['left','palm','right','weird','yes']
     className = className_list[predictedClass]
     '''
     if predictedClass == 0:
@@ -272,7 +272,7 @@ def talker(gesture_class):
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
     while not rospy.is_shutdown():
-        rospy.loginfo(gesture_class)
+        #rospy.loginfo(gesture_class)
         pub.publish(gesture_class)
         rate.sleep()
 

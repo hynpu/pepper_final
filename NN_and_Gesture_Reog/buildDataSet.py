@@ -48,10 +48,10 @@ def main():
     aWeight = 0.5
 
     # get the reference to the webcam
-    camera = cv2.VideoCapture(0)
+    camera = cv2.VideoCapture(4)
 
     # region of interest (ROI) coordinates
-    top, right, bottom, left = 10, 350, 225, 590
+    top, right, bottom, left = 10, 10, 225, 250
 
     # initialize num of frames
     num_frames = 0
@@ -105,7 +105,7 @@ def main():
                     if start_recording:
 
                         # Mention the directory in which you wanna store the images followed by the image name
-                        cv2.imwrite("Dataset/FistTest/fist_" +
+                        cv2.imwrite("/home/pourya/catkin_ws/src/pepper_final/NN_and_Gesture_Reog/dataset/FistTest/fist_" +
                                     str(image_num) + '.png', thresholded)
                         image_num += 1
                     cv2.imshow("Thesholded", thresholded)
