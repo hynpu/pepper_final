@@ -63,3 +63,5 @@ https://github.com/hynpu/pepper_final/blob/main/src/ges_signal_proc.py
 
 Run a smooth filter at the frequency of 20Hz. The algo will filter the most common appeared gesture from topic "gesture_class", and also consider if the appearance number of current gesture is greater than the threshold (which is 60% of the past 20 gestures). If so, output the gesture to the topic 'cur_gest', which will be used by PEPPER.
 
+# RQT graph
+![](https://github.com/hynpu/pepper_final/blob/main/rosgraph.png)
